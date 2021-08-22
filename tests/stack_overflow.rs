@@ -2,8 +2,8 @@
 #![no_main]
 #![feature(abi_x86_interrupt)]
 
+use boronos::{exit_qemu, serial_print, serial_println, QemuExitCode};
 use core::panic::PanicInfo;
-use boronos::{serial_print, serial_println, exit_qemu, QemuExitCode};
 use lazy_static::lazy_static;
 use x86_64::structures::idt::{InterruptDescriptorTable, InterruptStackFrame};
 
@@ -45,7 +45,10 @@ pub fn init_test_idt() {
     TEST_IDT.load();
 }
 
-extern "x86-interrupt" fn test_double_fault_handler(_stack_frame: InterruptStackFrame, _error_code: u64) -> ! {
+extern "x86-interrupt" fn test_double_fault_handler(
+    _stack_frame: InterruptStackFrame,
+    _error_code: u64,
+) -> ! {
     serial_println!("[ok]");
     exit_qemu(QemuExitCode::Success);
     loop {}
