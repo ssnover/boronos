@@ -1,2 +1,2 @@
 # boronos
-This is a repository for holding onto the simple Rust kernel I'm creating while following along with Philipp Oppermann's excellent blog series: [Writing an OS in Rust](https://os.phil-opp.com/)
+This is a repository for holding onto the simple Rust kernel I'm creating while following along with Philipp Oppermann's excellent blog series: [Writing an OS in Rust](https://os.phil-opp.com/).

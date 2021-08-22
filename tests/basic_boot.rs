@@ -7,25 +7,19 @@
 use boronos::println;
 use core::panic::PanicInfo;
 
-#[cfg(not(test))]
-#[panic_handler]
-fn panic(info: &PanicInfo) -> ! {
-    println!("{}", info);
+#[no_mangle]
+pub extern "C" fn _start() -> ! {
+    test_main();
+
     loop {}
 }
 
-#[cfg(test)]
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
     boronos::test_panic_handler(info)
 }
 
-#[no_mangle]
-pub extern "C" fn _start() -> ! {
-    println!("Hello world{}", "!");
-
-    #[cfg(test)]
-    test_main();
-
-    loop {}
+#[test_case]
+fn test_println() {
+    println!("test_println output");
 }
